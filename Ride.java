@@ -15,6 +15,10 @@ public class Ride {
     index = rowNo;
   }
 
+  public void getIndex() {
+    return index;
+  }
+
   public void setRideDone() {
     isDone = true;
   }

@@ -9,14 +9,14 @@ public class rideSolver {
 
   //fitness is the bonus value (journey distance * bonus multiplier) - distance to pick-up point, or 0 if it won't finish on time
 	public static int fitnessTest(Car car, Ride ride, int rideBonus){
-	    //stored so doesn't need to calculate twice:
-		  int journeyDistance = distanceInt(ride.getStarting()[0],ride.getStarting()[1],ride.getFinishing()[0],ride.getFinishing()[1]);
-	    int distanceToPickUpPoint = distanceInt(car.x, car.y, ride.getStarting()[0],ride.getStarting()[1]);
+    //stored so doesn't need to calculate twice:
+	  int journeyDistance = distanceInt(ride.getStarting()[0],ride.getStarting()[1],ride.getFinishing()[0],ride.getFinishing()[1]);
+    int distanceToPickUpPoint = distanceInt(car.x, car.y, ride.getStarting()[0],ride.getStarting()[1]);
 
-	    if(ride.getFinish() >= (car.step + journeyDistance + distanceToPickUpPoint))
-	        return journeyDistance*rideBonus - distanceToPickUpPoint;
-	    else
-	       return 0;
+    if(ride.getFinish() >= (car.step + journeyDistance + distanceToPickUpPoint))
+        return journeyDistance*rideBonus - distanceToPickUpPoint;
+    else
+       return 0;
 	}
 
 	private static int distanceInt(int x1, int y1, int x2, int y2) {
