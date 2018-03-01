@@ -3,19 +3,20 @@ public class Ride {
   private int[] finishing;
   private int start;
   private int finish;
+  private boolean isDone;
+  private int index;
 
-  public Ride() {
-    starting = new int[2];
-    finishing = new int[2];
-    start = 0;
-    finish = 0;
-  }
-
-  public Ride(int[] startL, int[] finishL, int startStep, int finishStep) {
+  public Ride(int[] startL, int[] finishL, int startStep, int finishStep, int rowNo) {
     starting = startL;
     finishing = finishL;
     start = startStep;
     finish = finishStep;
+    isDone = false;
+    index = rowNo;
+  }
+
+  public void setRideDone() {
+    isDone = true;
   }
 
   public void setStart(int row, int col) {
