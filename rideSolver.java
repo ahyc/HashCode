@@ -76,7 +76,7 @@ public class rideSolver {
           printNoOfFinishingRides(intersections);
 
           Car[] cars = new Car[noVehicles];
-
+	Ride[] rides = new Ride[noRides];//TODO
           for(Car car: cars) {
             car = new Car();
     	  int currentFittestRideNo=0;
