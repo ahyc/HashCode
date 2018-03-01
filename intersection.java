@@ -18,13 +18,17 @@ public class intersection {
     return finishing.size();
   }
 
-  public void addStartingRide(int[] startL, int[] finishL, int startStep, int finishStep) {
-    Ride ride = new Ride(startL, finishL, startStep, finishStep);
+  public void removeStartingRide(Ride ride) {
+    starting.remove(ride);
+  }
+
+  public void addStartingRide(int[] startL, int[] finishL, int startStep, int finishStep, int index) {
+    Ride ride = new Ride(startL, finishL, startStep, finishStep, index);
     starting.add(ride);
   }
 
-  public void addFinishingRide(int[] startL, int[] finishL, int startStep, int finishStep) {
-    Ride ride = new Ride(startL, finishL, startStep, finishStep);
+  public void addFinishingRide(int[] startL, int[] finishL, int startStep, int finishStep, int index) {
+    Ride ride = new Ride(startL, finishL, startStep, finishStep, index);
     finishing.add(ride);
   }
 }
