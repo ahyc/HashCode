@@ -6,12 +6,33 @@ import java.util.stream.Stream;
 import java.util.stream.Collectors;
 
 public class rideSolver {
+  
+  //fitness is the bonus value (journey distance * bonus multiplier) - distance to pick-up point, or 0 if it won't finish on time
+	public static int fitnessTest(Car car, Ride ride, int rideBonus){
+	    //stored so doesn't need to calculate twice:
+		  int journeyDistance = distanceInt(ride.getStarting()[0],ride.getStarting()[1],ride.getFinishing()[0],ride.getFinishing()[1]);
+	    int distanceToPickUpPoint = distanceInt(car.x, car.y, ride.getStarting()[0],ride.getStarting()[1]);
+	      
+	    if(ride.getFinish() >= (car.step + journeyDistance + distanceToPickUpPoint))
+	        return journeyDistance*rideBonus - distanceToPickUpPoint;
+	    else
+	       return 0;
+	}
+	
+	private static int distanceInt(int x1, int y1, int x2, int y2) {
+		return Math.abs(x2-x1) + Math.abs(y2-y1);
+	}
+  
   public static void main(String args[]) {
     if(args.length == 1) {
       String fileName = "Input/"+args[0];
         // System.out.println("The input data set is: '" + fileName +"'");
 
+<<<<<<< HEAD
       int noVehicles, noRides, noSteps, R, C, bonus;
+=======
+      int noVehicles, noRides, noSteps, R, C, rideBonus;
+>>>>>>> 174412423534675632b08f61014a0d78fb0d0131
       Integer[][] grid;
 
       try {
