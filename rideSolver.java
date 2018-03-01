@@ -77,8 +77,20 @@ public class rideSolver {
 
           Car[] cars = new Car[noVehicles];
 
-          for(Car x: cars) {
-            x = new Car();
+          for(Car car: cars) {
+            car = new Car();
+    	  int currentFittestRideNo=0;
+    	  int currentFittestRideNosFitness=0;
+    	  while(car.step>noSteps){//while there's still time for the car to pick up rides
+	    	  for(int i=0; i<rides.length; i++){//finds fittest ride 
+	    		  if(rides[i].getStart()>car.step && currentFittestRideNosFitness < fitnessTest(car,rides[i],rideBonus)){
+	    			  currentFittestRideNo = i;
+	    			  currentFittestRideNosFitness = fitnessTest(car,rides[i],rideBonus);
+	    		  }
+	    	  }
+	    	  car.addRide(rides[currentFittestRideNo]);//adds ride to car's schedule, also updates car's time & location
+    	  }
+      }
           }
 
 
