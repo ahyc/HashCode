@@ -11,28 +11,50 @@ public class rideSolver {
       String fileName = "Input/"+args[0];
         // System.out.println("The input data set is: '" + fileName +"'");
 
-      int noVehicles, noRides, noSteps;
-      String[][] grid;
+      int noVehicles, noRides, noSteps, R, C;
+      Integer[][] grid;
 
       try {
         int[] input = Arrays.stream(Files.lines(Paths.get(fileName)).map(i -> i.split(" ")).findFirst().get())
                       .mapToInt(Integer::parseInt)
                       .toArray();
-        noVehicles = input[2]; noRides = input[3]; noSteps = input[5];
+         R = input[0];  C = input[1];  noVehicles = input[2]; noRides = input[3]; noSteps = input[5];
           // System.out.println("Vehicle No: " +noVehicles+ ", Ride No: "+noRides + ", Step no: " +noSteps);
 
-        grid = Files.lines(Paths.get(fileName)).skip(1)
-                          .map(line -> Arrays.stream(line.split(""))
-                                              .map(ingred -> ingred).toArray(String[]::new))
-                          .toArray(String[][]::new);
+          grid = Files.lines(Paths.get(fileName)).skip(1)
+                          .map(line -> Arrays.stream(line.split(" "))
+                                              .map(ingred -> Integer.parseInt(ingred)).toArray(Integer[]::new))
+                          .toArray(Integer[][]::new);
 
-          // System.out.println("The input is: ");
-          // Arrays.stream(grid)
-          //       .map(a -> String.join(" ", a))
-          //       .forEach(System.out::println);
+          // System.out.println("The input grid is: ");
+          // System.out.println(Arrays.deepToString(grid)
+          //                           .replace("], ", "]\n")
+          //                           .replace("[[", "[")
+          //                           .replace("]]", "]"));
           //
           // System.out.println("The input headers are: " +Arrays.toString(input));
-          // printIntGrid(fileName);
+
+          intersection[][] intersections = new intersection[R][C];
+          for(int i = 0; i < intersections.length; i++) {
+            for(int j = 0; j < intersections[0].length; j++) {
+              intersections[i][j] = new intersection();
+            }
+          }
+
+
+          for(int row = 0; row < grid.length; row++) {
+            int[] startL = new int[] {grid[row][0], grid[row][1]};
+            int[] finishL = new int[] {grid[row][2], grid[row][3]};
+            int startStep = grid[row][4];   int finishStep = grid[row][5];
+
+            intersections[startL[0]][startL[1]].addStartingRide(startL, finishL, startStep, finishStep);
+            intersections[finishL[0]][finishL[1]].addFinishingRide(startL, finishL, startStep, finishStep);
+            // System.out.println(startL[0] + " " + startL[1] + " " + startStep);
+            // System.out.println(finishL[0] + " " + finishL[1] + " " + finishStep);
+          }
+
+          printNoOfStartingRides(intersections);
+          printNoOfFinishingRides(intersections);
 
       } catch(IOException e) {
         e.printStackTrace();
@@ -42,4 +64,25 @@ public class rideSolver {
       System.out.println("File name of input data set required. Exiting...");
     }
   }
+
+  public static void printNoOfStartingRides(intersection[][] intersections) {
+    for(int i = 0; i < intersections.length; i++) {
+      for(int j = 0; j < intersections[0].length; j++) {
+        System.out.printf((intersections[i][j]).getNoOfStarting() +" ");
+      }
+      System.out.println();
+    }
+    System.out.println();
+  }
+
+  public static void printNoOfFinishingRides(intersection[][] intersections) {
+    for(int i = 0; i < intersections.length; i++) {
+      for(int j = 0; j < intersections[0].length; j++) {
+        System.out.printf((intersections[i][j]).getNoOfFinishing() +" ");
+      }
+      System.out.println();
+    }
+    System.out.println();
+  }
+
 }
