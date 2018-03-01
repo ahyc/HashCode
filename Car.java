@@ -23,4 +23,12 @@ public class Car{
 		x = ride.getFinishing()[0];
 		y = ride.getFinishing()[1];
 	}
+
+	private ArrayList<Integer> getRides() {
+		return ridesToDo;
+	}
+
+	private int getTotalRideNo() {
+		return ridesToDo.size();
+	}
 }

@@ -1,6 +1,8 @@
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
 import java.util.Arrays;
 import java.util.stream.Stream;
 import java.util.stream.Collectors;
@@ -73,11 +75,12 @@ public class rideSolver {
           printNoOfStartingRides(intersections);
           printNoOfFinishingRides(intersections);
 
-          Ride ride = new Ride(new int[]{0,0}, new int[]{1,3}, 2, 9);
+          Car[] cars = new Car[noVehicles];
 
-          intersections[0][0].removeStartingRide(ride);
+          for(Car x: cars) {
+            x = new Car();
+          }
 
-          System.out.println(intersections[0][0].getNoOfStarting());
 
       } catch(IOException e) {
         e.printStackTrace();
@@ -106,6 +109,28 @@ public class rideSolver {
       System.out.println();
     }
     System.out.println();
+  }
+
+  private static void printOutput(Car[] cars, String fileName) {
+    String output = fileName.replace("in","out").replace("Input", "Output");
+
+    if(cars.length > 0) {
+      for(int i = 0; i < cars.length; i ++) {
+        try {
+          String rides = cars[i].getTotalRideNo() + " ";
+          for(Integer ride: cars[i].getRides()) {
+            rides += ride +" ";
+          }
+          Files.write(Paths.get(output), (rides + System.lineSeparator()).getBytes(), StandardOpenOption.APPEND);
+          System.out.println("File \""+output+"\" created.");
+        } catch (IOException e) {
+          e.printStackTrace();
+        }
+      }
+    } else {
+      System.out.println("There were no solutions to write!");
+    }
+
   }
 
 }
