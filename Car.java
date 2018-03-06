@@ -1,34 +1,42 @@
+import java.util.List;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
-public class Car{
-
-	public int x;
-	public int y;
-	public int step;
-	public ArrayList<Integer> ridesToDo;
+public class Car {
+	private int[] location;
+	private int step;
+	public List<Integer> ridesToDo;
 
 	public Car(){
-		ridesToDo = new ArrayList<Ride>();
+		location = new int[] {0,0};
+		step = 0;
+		ridesToDo = new ArrayList<Integer>();
 	}
 
-	public int distance(int x1, int y1, int x2, int y2){
-		return Math.abs(x2-x1) + Math.abs(y2-y1);
-	}
-
+	//update time, position
+	//assume only pick rides that can be finished in time, so it'll get there before or at starting time so you don't have to calculate that
 	public void addRide(Ride ride){
 		ridesToDo.add(ride.getIndex());
-		//update time, position
-		//assume only pick rides that can be finished in time, so it'll get there before or at starting time so you don't have to calculate that
-		step += ride.getStart() + distance(ride.getStarting()[0],ride.getStarting()[1],ride.getFinishing()[0],ride.getFinishing()[1]);
-		x = ride.getFinishing()[0];
-		y = ride.getFinishing()[1];
+		step += ride.getDistance() + ride.getStart();
+		location = ride.getFinishing();
+		ride.setRideDone();
 	}
 
-	private ArrayList<Integer> getRides() {
-		return ridesToDo;
-	}
-
-	private int getTotalRideNo() {
+	public int getTotalRideNo() {
 		return ridesToDo.size();
+	}
+
+	public int getStep() {
+		return step;
+	}
+
+	public int[] getLocation() {
+		return location;
+	}
+
+	public String toString() {
+		return ridesToDo.size() + " " + ridesToDo.stream()
+																							.map(rideNo -> String.valueOf(rideNo))
+																							.collect(Collectors.joining(" "));
 	}
 }

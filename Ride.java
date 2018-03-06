@@ -1,42 +1,51 @@
 public class Ride {
+  private int index;
   private int[] starting;
   private int[] finishing;
+  private int distance;
   private int start;
   private int finish;
   private boolean isDone;
-  private int index;
 
   public Ride(int[] startL, int[] finishL, int startStep, int finishStep, int rowNo) {
     starting = startL;
     finishing = finishL;
     start = startStep;
     finish = finishStep;
-    isDone = false;
     index = rowNo;
+    distance = calculateDistance(startL, finishL);
+    isDone = false;
   }
 
-  public void getIndex() {
+  private int calculateDistance(int[] startL, int[] finishL) {
+    return Math.abs(finishL[1] - startL[1]) + Math.abs(finishL[0] - startL[0]);
+  }
+
+  public boolean isCarFit(Car car) {
+    if((calculateDistance(car.getLocation(), starting) + distance + car.getStep()) < finish)
+      return true;
+    else
+      return false;
+  }
+
+  public int getDistance() {
+    return distance;
+  }
+
+  public int getMinStep() {
+    return (finish - 1) - distance;
+  }
+
+  public int getIndex() {
     return index;
+  }
+
+  public boolean getStatus() {
+    return isDone;
   }
 
   public void setRideDone() {
     isDone = true;
-  }
-
-  public void setStart(int row, int col) {
-    starting[0] = row;  starting[1] = col;
-  }
-
-  public void setFinish(int row, int col) {
-    finishing[0] = row; finishing[1] = col;
-  }
-
-  public void setStart(int step) {
-    start = step;
-  }
-
-  public void setFinish(int step) {
-    finish = step;
   }
 
   public int[] getStarting() {
