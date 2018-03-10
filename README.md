@@ -15,7 +15,7 @@ java rideSolver a_example.in
 ## Scores and Number of Unassigned rides:
 
 | Input Data Set         | Points        | # Unassigned Rides  |
-| :--------------------- |:-------------:| -------------------:|
+| :--------------------- |--------------:|--------------------:|
 | a_example.in           |      10       |          0          |
 | b_should_be_easy.in    |    176877     |          6          |
 | c_no_hurry.in          |   14781814    |        2258         |
