@@ -74,7 +74,7 @@ public class Car implements Comparable<Car> {
 	@Override
 	public String toString() {
 		return ridesToDo.size() + " " + ridesToDo.stream()
-																							.map(rideNo -> String.valueOf(rideNo))
-																							.collect(Collectors.joining(" "));
+													.map(rideNo -> String.valueOf(rideNo))
+													.collect(Collectors.joining(" "));
 	}
 }
