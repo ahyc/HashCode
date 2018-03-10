@@ -8,9 +8,9 @@ public class Ride {
   private boolean isDone;
 
   /**
-		* Constructor to 'Ride' object initialising various varibles depending on input params.
-		*
-		* @param  startL int array of starting location of ride
+  	* Constructor to 'Ride' object initialising various varibles depending on input params.
+	*
+	* @param  startL int array of starting location of ride
     * @param  finishL int array of finishing location of ride
     * @param  startStep earliest step in which the ride can start from
     * @param  finishStep latest step in which the ride must be finished before
